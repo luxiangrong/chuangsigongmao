@@ -1,0 +1,240 @@
+// 设置参数相关
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// 字体相关
+$font-family-sans-serif: "Helvetica Neue",
+Helvetica,
+"Hiragino Sans GB",
+"Hiragino Sans GB W3",
+"Microsoft YaHei",
+Arial,
+sans-serif !default;
+$font-family-serif: Georgia,
+"Times New Roman",
+Times,
+serif !default;
+//** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
+$font-family-monospace: Menlo,
+Monaco,
+Consolas,
+"Courier New",
+monospace !default;
+//gutter
+$grid-gutter-width: 0;
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+.container {
+    width: 1172px !important;
+}
+
+* {}
+
+*:before,
+*:after {}
+
+#header {
+    .container {
+        padding-top: 30px;
+        .col-main {
+            @include make-lg-column(11);
+            width: 1080px !important;
+            .languages {
+                text-align: right;
+                padding-top: 15px;
+            }
+            .row-1 {
+                margin-bottom: 12px;
+            }
+            .row-2 {
+                .main-nav {
+                    font-size: 16px;
+                    ul.nav {
+                        margin-left: 0px;
+                        > li {
+                            margin-right: 20px;
+                            a {
+                                color: #4c4c4c;
+                                padding: 5px 15px;
+                            }
+                        }
+                    }
+                    > .nav-pills {
+                        > li.active {
+                            > a {
+                                color: #ffffff;
+                            }
+                        }
+                    }
+                }
+                .has-feedback {
+                    .glyphicon-search {
+                        color: #cccccc;
+                    }
+                }
+            }
+        }
+        .col-side {
+            @include make-lg-column(1);
+            width: 92px !important;
+            text-align: right;
+        }
+    }
+}
+
+.help-note {
+    background-color: #f0f0f0;
+    color: #1b1a1a;
+    font-size: 16px;
+    line-height: 45px;
+}
+
+.main-content {
+    .col-main {
+        @include make-lg-column(9);
+        width: 910px !important;
+        margin-right: 42px;
+        h2 {
+            &.title {
+                border-left: 5px solid #2e3092;
+                padding-left: 0.5em;
+                font-size: 18px;
+                color: #2e3092;
+            }
+        }
+        .breadcrumb {
+            background-color: transparent;
+            padding-left: 0px;
+            > li {
+                color: #7c7c7c;
+                a {
+                    color: #7c7c7c;
+                }
+                + li:before {
+                    content: '> ';
+                }
+            }
+        }
+        .nav-tabs {
+            border-bottom: none;
+            font-size: 16px;
+            margin-left: -30px;
+            > li {
+                > a {
+                    margin-right: 2px;
+                    border: 1px solid transparent;
+                    border-left-color: #7c7c7c;
+                    border-radius: 0;
+                    color: #7c7c7c;
+                    padding: 0 30px;
+                    &:hover, &:focus {
+                        color: darken(#205294, 20%);
+                        background: transparent;
+                    }
+                }
+                &:first-child {
+                    > a {
+                        border-left-color: transparent;
+                    }
+                }
+                // Active state, and its :hover to override normal :hover
+                &.active > a {
+                    &, &:hover, &:focus {
+                        color: #205294;
+                        background-color: transparent;
+                        border: 1px solid transparent;
+                        border-left-color: #7c7c7c;
+                        cursor: default;
+                    }
+                }
+            }
+        }
+        .formula-wrap {
+            background-color: #f0f0f0;
+            border: 1px solid #cccccc;
+            margin: 30px 0 100px;
+            .col-nav {
+                @include make-lg-column(3);
+                width: 200px !important;
+                border-right: 1px solid #cccccc;
+                .nav {
+                    font-size: 16px;
+                    > li {
+                        > a {
+                            padding-top: 20px;
+                            padding-bottom: 20px;
+                            color: #205294;
+                            text-align: center;
+                            border-bottom: 1px solid #cccccc;
+                            &:hover, &:focus {
+                                text-decoration: none;
+                                color: #ffffff;
+                                background-color: lighten(#205294, 20%);
+                            }
+                        }
+                        &:last-child {
+                        	> a {
+                        		border-bottom: none;
+                        	}
+                        }
+                        &.active > a {
+					      &,
+					      &:hover,
+					      &:focus {
+					        color: #ffffff;
+					        background-color: #205294;
+					        border: none;
+					      }
+					    }
+                    }
+                }
+            }
+            .col-formula {
+                @include make-lg-column(3);
+                width: 707px !important;
+            }
+        }
+    }
+    .col-side {
+        @include make-lg-column(9);
+        width: 220px !important;
+    }
+}
+
+footer {
+    background-color: #f3f3f3;
+    padding-top: 50px;
+    padding-bottom: 80px;
+    .site-map {
+        h4 {
+            font-size: 16px;
+            color: #262626;
+        }
+        .nav {
+            padding-right: 60px;
+            > li {
+                > a {
+                    color: #2e3092;
+                    padding-left: 0px;
+                    &:hover, &:focus {
+                        background-color: transparent;
+                        color: lighten(#2e4092, 20%);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.copyright {
+	background-color: #e4e4e4;
+	p {
+		color: #767676;
+		font-size: 12px;
+		text-align: center;
+		line-height: 50px;
+		margin: 0;
+		span {
+			margin-right: 2em; 
+		}
+	}
+}
