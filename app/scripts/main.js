@@ -34,4 +34,16 @@
 		o.cssText = 'html, head, head *, body, *.before, *.after, *.before *, *.after * { behavior: none; } * { behavior: expression($.pseudo(this)); }';
 	}
 
+	$(document).ready(function(){
+		$('.tabs a').on('click', function(e){
+			e.preventDefault();
+			var target = $(this).attr('href');
+			$(this).closest('.tabs').find('h3').removeClass('active');
+			$(this).closest('h3').addClass('active');
+			$('.tab-panes').find('.tab-pane').hide();
+			$('.tab-panes').find(target).show();
+		});
+		$('.tabs a').eq(0).trigger('click');
+	});
+
 })(jQuery);

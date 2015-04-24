@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>矢高计算</title>
+    <title>角度长度</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="/favicon.ico">
@@ -92,33 +92,112 @@
                     <div class="row formula-wrap clearfix">
                         <div class="col-nav">
                             <ul class="nav">
-                                <li role="presentation" class="active"><a href="shigao.html">失高计算</a></li>
+                                <li role="presentation"><a href="shigao.html">失高计算</a></li>
                                 <li role="presentation"><a href="jiaoju.html">焦距计算</a></li>
                                 <li role="presentation"><a href="guangquan.html">光圈计算</a></li>
                                 <li role="presentation"><a href="daojiao.html">倒角相关</a></li>
                                 <li role="presentation"><a href="zhongxinpiancha.html">中心偏差计算</a></li>
-                                <li role="presentation"><a href="jiaoduchangdu.html">角度长度换算 </a></li>
+                                <li role="presentation" class="active"><a href="jiaoduchangdu.html">角度长度换算 </a></li>
                                 <li role="presentation"><a href="pingmianjingpan.html">平面镜盘排列计算</a></li>
                             </ul>
                         </div>
                         <div class="col-formula">
-                            <h3>失高、半径及直径计算</h3>
+                            <h3>中心偏差计算（透射定心）</h3>
                             <!-- Tab panes -->
                             <div class="formula-1">
-                                <p class="help">输入其中任意两项数值，可计算出第三项数值</p>
-                                <table class="table table-form">
+                                <table class="table table-condensed table-form table-form-c">
                                     <tbody>
                                         <tr>
-                                            <th><button class="btn btn-result">h（失高）</button></th>
-                                            <td><input type="text" /></td>
+                                            <td>
+                                                <label>角度</label>
+                                            </td>
+                                            <td>
+                                                <input class="sm" type="text" />
+                                            </td>
+                                            <td style="width: 100px;">
+                                            	<button class="btn btn-result">转化 <img src="images/icon01.png" height="16" width="23" alt=""></button>
+                                            	<button class="btn btn-result"><img src="images/icon02.png" height="16" width="23" alt=""> 转化</button>
+                                            </td>
+                                            <td>
+                                                <input class="xs" type="text" />
+                                            </td>
+                                            <td>
+                                                <label>角度</label>
+                                            </td>
+                                            <td>
+                                                <input class="xs" type="text" />
+                                            </td>
+                                            <td>
+                                                <label>角度</label>
+                                            </td>
+                                            <td>
+                                                <input class="sm" type="text" />
+                                            </td>
+                                            <td>
+                                                <label>角度</label>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <table class="table table-condensed table-form table-form-c">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <label>角度</label>
+                                            </td>
+                                            <td>
+                                                <input class="md" type="text" />
+                                            </td>
+                                            <td>
+                                            	<button class="btn btn-result">转化 <img src="images/icon01.png" height="16" width="23" alt=""></button>
+                                            	<br/>
+                                            	<button class="btn btn-result"><img src="images/icon02.png" height="16" width="23" alt=""> 转化</button>
+                                            </td>
+                                            <td>
+                                                <input class="md" type="text" />
+                                            </td>
+                                            <td>
+                                                <label>弧度</label>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <th><button class="btn btn-result">SR（球半径）</button></th>
-                                            <td><input type="text" /></td>
+                                            <td>
+                                                <label>英寸</label>
+                                            </td>
+                                            <td>
+                                                <input class="md" type="text" />
+                                            </td>
+                                            <td>
+                                            	<button class="btn btn-result">转化 <img src="images/icon01.png" height="16" width="23" alt=""></button>
+                                            	<br/>
+                                            	<button class="btn btn-result"><img src="images/icon02.png" height="16" width="23" alt=""> 转化</button>
+                                            </td>
+                                            <td>
+                                                <input class="md" type="text" />
+                                            </td>
+                                            <td>
+                                                <label>毫米</label>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <th><button class="btn btn-result">Φ（直径）</button></th>
-                                            <td><input type="text" /></td>
+                                            <td>
+                                                <label>屈光度</label>
+                                            </td>
+                                            <td>
+                                                <input class="md" type="text" />
+                                            </td>
+                                            <td>
+                                            	<button class="btn btn-result">转化 <img src="images/icon01.png" height="16" width="23" alt=""></button>
+                                            	<br/>
+                                            	<button class="btn btn-result"><img src="images/icon02.png" height="16" width="23" alt=""> 转化</button>
+                                            </td>
+                                            <td>
+                                                <input class="md" type="text" />
+                                            </td>
+                                            <td>
+                                                <label>f’(焦距mm)</label>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

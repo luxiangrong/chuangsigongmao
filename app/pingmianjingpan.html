@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>矢高计算</title>
+    <title>平面镜盘</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="/favicon.ico">
@@ -92,33 +92,93 @@
                     <div class="row formula-wrap clearfix">
                         <div class="col-nav">
                             <ul class="nav">
-                                <li role="presentation" class="active"><a href="shigao.html">失高计算</a></li>
+                                <li role="presentation"><a href="shigao.html">失高计算</a></li>
                                 <li role="presentation"><a href="jiaoju.html">焦距计算</a></li>
                                 <li role="presentation"><a href="guangquan.html">光圈计算</a></li>
                                 <li role="presentation"><a href="daojiao.html">倒角相关</a></li>
                                 <li role="presentation"><a href="zhongxinpiancha.html">中心偏差计算</a></li>
                                 <li role="presentation"><a href="jiaoduchangdu.html">角度长度换算 </a></li>
-                                <li role="presentation"><a href="pingmianjingpan.html">平面镜盘排列计算</a></li>
+                                <li role="presentation" class="active"><a href="pingmianjingpan.html">平面镜盘排列计算</a></li>
                             </ul>
                         </div>
                         <div class="col-formula">
-                            <h3>失高、半径及直径计算</h3>
+                            <h3>平面镜盘排列计算</h3>
                             <!-- Tab panes -->
                             <div class="formula-1">
-                                <p class="help">输入其中任意两项数值，可计算出第三项数值</p>
-                                <table class="table table-form">
+                                <table class="table table-condensed table-form table-form-c mt-50">
                                     <tbody>
                                         <tr>
-                                            <th><button class="btn btn-result">h（失高）</button></th>
-                                            <td><input type="text" /></td>
+                                            <th>
+                                                <label>Φ（零件直径）</label>
+                                            </th>
+                                            <td>
+                                                <input class="md" type="text" />
+                                            </td>
+                                            <th>
+                                                <label>d（间隔距离）</label>
+                                            </th>
+                                            <td>
+                                                <input class="md" type="text" />
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <th><button class="btn btn-result">SR（球半径）</button></th>
-                                            <td><input type="text" /></td>
+                                            <th>
+                                                <label>排列方法：</label>
+                                            </th>
+                                            <td colspan="3">
+												<input class="xhg" type="text" />
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <th><button class="btn btn-result">Φ（直径）</button></th>
-                                            <td><input type="text" /></td>
+                                            <th>
+                                                <label>请选择</label>
+                                            </th>
+                                            <td>
+                                                <select name="" id="">
+                                                	<option value="">首圈1 总圈数1</option>
+                                                	<option value="">首圈3 总圈数1</option>
+                                                	<option value="">首圈4 总圈数1</option>
+                                                	<option value="">首圈1 总圈数2</option>
+                                                	<option value="">首圈3 总圈数2</option>
+                                                	<option value="">首圈4 总圈数2</option>
+                                                	<option value="">首圈1 总圈数3</option>
+                                                	<option value="">首圈3 总圈数3</option>
+                                                	<option value="">首圈4 总圈数3</option>
+                                                	<option value="">首圈1 总圈数4</option>
+                                                	<option value="">首圈3 总圈数4</option>
+                                                	<option value="">首圈4 总圈数4</option>
+                                                	<option value="">首圈1 总圈数5</option>
+                                                	<option value="">首圈3 总圈数5</option>
+                                                	<option value="">首圈4 总圈数5</option>
+                                                	<option value="">首圈1 总圈数6</option>
+                                                	<option value="">首圈3 总圈数6</option>
+                                                	<option value="">首圈4 总圈数6</option>
+                                                	<option value="">首圈1 总圈数7</option>
+                                                	<option value="">首圈3 总圈数7</option>
+                                                	<option value="">首圈4 总圈数7</option>
+                                                	<option value="">首圈1 总圈数8</option>
+                                                	<option value="">首圈3 总圈数8</option>
+                                                	<option value="">首圈4 总圈数8</option>
+                                                	<option value="">首圈1 总圈数9</option>
+                                                	<option value="">首圈3 总圈数9</option>
+                                                	<option value="">首圈4 总圈数9</option>
+                                                	<option value="">首圈1 总圈数10</option>
+                                                	<option value="">首圈3 总圈数10</option>
+                                                	<option value="">首圈4 总圈数10</option>
+                                                	<option value="">首圈1 总圈数11</option>
+                                                	<option value="">首圈3 总圈数11</option>
+                                                	<option value="">首圈4 总圈数11</option>
+                                                	<option value="">首圈1 总圈数12</option>
+                                                	<option value="">首圈3 总圈数12</option>
+                                                	<option value="">首圈4 总圈数12</option>
+                                                </select>
+                                            </td>
+                                            <th>
+                                                <label>Di（镜盘直径）</label>
+                                            </th>
+                                            <td>
+                                                <input class="md" type="text" />
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
