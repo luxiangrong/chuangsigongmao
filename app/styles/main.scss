@@ -104,13 +104,16 @@ $grid-gutter-width: 0;
         .breadcrumb {
             background-color: transparent;
             padding-left: 0px;
+            margin-left: 0px;
             > li {
                 color: #7c7c7c;
+                display: inline-block;
+                *display: inline;
                 a {
                     color: #7c7c7c;
                 }
                 + li:before {
-                    content: '> ';
+                    content: '';
                 }
             }
         }
@@ -118,6 +121,7 @@ $grid-gutter-width: 0;
             border-bottom: none;
             font-size: 16px;
             margin-left: -30px;
+            margin-left: 0px;
             > li {
                 > a {
                     margin-right: 2px;
@@ -211,6 +215,7 @@ footer {
         }
         .nav {
             padding-right: 60px;
+            margin-left: 0px;
             > li {
                 > a {
                     color: #2e3092;
