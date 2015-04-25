@@ -10,6 +10,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/jQuery-Validation-Engine/css/validationEngine.jquery.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -92,7 +93,7 @@
                     <div class="row formula-wrap clearfix">
                         <div class="col-nav">
                             <ul class="nav">
-                                <li role="presentation" class="active"><a href="shigao.html">失高计算</a></li>
+                                <li role="presentation" class="active"><a href="shigao.html">矢高计算</a></li>
                                 <li role="presentation"><a href="jiaoju.html">焦距计算</a></li>
                                 <li role="presentation"><a href="guangquan.html">光圈计算</a></li>
                                 <li role="presentation"><a href="daojiao.html">倒角相关</a></li>
@@ -102,26 +103,40 @@
                             </ul>
                         </div>
                         <div class="col-formula">
-                            <h3>失高、半径及直径计算</h3>
+                            <h3>矢高、半径及直径计算</h3>
                             <!-- Tab panes -->
                             <div class="formula-1">
                                 <p class="help">输入其中任意两项数值，可计算出第三项数值</p>
-                                <table class="table table-form">
-                                    <tbody>
-                                        <tr>
-                                            <th><button class="btn btn-result">h（失高）</button></th>
-                                            <td><input type="text" /></td>
-                                        </tr>
-                                        <tr>
-                                            <th><button class="btn btn-result">SR（球半径）</button></th>
-                                            <td><input type="text" /></td>
-                                        </tr>
-                                        <tr>
-                                            <th><button class="btn btn-result">Φ（直径）</button></th>
-                                            <td><input type="text" /></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <form action="" id="form-hrd">
+                                    <table class="table table-form">
+                                        <tbody>
+                                            <tr>
+                                                <th>
+                                                    <button class="btn btn-result" id="result-h">h（矢高）</button>
+                                                </th>
+                                                <td>
+                                                    <input id="h" type="text" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <button class="btn btn-result" id="result-r">SR（球半径）</button>
+                                                </th>
+                                                <td>
+                                                    <input id="r" type="text" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <button class="btn btn-result" id="result-d">Φ（直径）</button>
+                                                </th>
+                                                <td>
+                                                    <input id="d" type="text" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -187,7 +202,10 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <script src="bower_components/jQuery-Validation-Engine/js/languages/jquery.jquery.validationEngine-zh_CN.js"></script>
     <!-- endbower -->
+    <script src="bower_components/jQuery-Validation-Engine/js/jquery.validationEngine.js"></script>
+    <script src="bower_components/jQuery-Validation-Engine/js/languages/jquery.validationEngine-zh_CN.js"></script>
     <!-- endbuild -->
     <!-- build:js({app,.tmp}) scripts/main.js -->
     <script src="scripts/main.js"></script>
