@@ -45,7 +45,7 @@ $grid-gutter-width: 0;
     .container {
         padding-top: 30px;
         .col-main {
-            @include make-lg-column(11);
+            @include make-xs-column(11);
             width: 1080px !important;
             .languages {
                 text-align: right;
@@ -92,7 +92,7 @@ $grid-gutter-width: 0;
             }
         }
         .col-side {
-            @include make-lg-column(1);
+            @include make-xs-column(1);
             width: 92px !important;
             text-align: right;
         }
@@ -108,7 +108,7 @@ $grid-gutter-width: 0;
 
 .main-content {
     .col-main {
-        @include make-lg-column(9);
+        @include make-xs-column(9);
         width: 910px !important;
         margin-right: 42px;
         h2 {
@@ -179,7 +179,7 @@ $grid-gutter-width: 0;
             margin: 30px 0 100px;
             *clear: both;
             .col-nav {
-                @include make-lg-column(3);
+                @include make-xs-column(3);
                 width: 200px !important;
                 *width: 198px !important;
                 border-right: 1px solid #cccccc;
@@ -216,7 +216,7 @@ $grid-gutter-width: 0;
                 }
             }
             .col-formula {
-                @include make-lg-column(3);
+                @include make-xs-column(3);
                 width: 707px !important; 
                 h3 {
                     font-size: 20px;
@@ -350,7 +350,7 @@ $grid-gutter-width: 0;
         }
     }
     .col-side {
-        @include make-lg-column(9);
+        @include make-xs-column(9);
         width: 220px !important;
     }
 }

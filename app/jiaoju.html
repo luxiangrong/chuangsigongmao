@@ -10,8 +10,8 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/jQuery-Validation-Engine/css/validationEngine.jquery.css" />
     <!-- endbower -->
+    <link rel="stylesheet" href="bower_components/jQuery-Validation-Engine/css/validationEngine.jquery.css" />
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
@@ -113,140 +113,142 @@
                             </div>
                             <!-- Tab panes -->
                             <div class="tab-panes">
-                                <div class="tab-pane formula-1 clearfix" id="toujing-1">
-                                    <p class="help">说明：SR要带上“ ± ”号，按图纸以球心在右侧为正，有一面为平面则SR1（或SR2）输入0（或不输入，即空白）</p>
-                                    <table class="table table-form table-form-a">
-                                        <tbody>
-                                            <tr>
-                                                <th>
-                                                    <label>d（中心厚度）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                                <th>
-                                                    <label>n（折射率）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label>SR1（1面球半径）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                                <th>
-                                                    <label>SR2（2面球半径）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <table class="table table-form table-form-b">
-                                        <tbody>
-                                            <tr>
-                                                <th>
-                                                    <button class="btn btn-result">计算 f’（像方焦距）</button>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <button class="btn btn-result btn-result-2l">计算 lf’（透镜表面顶
-                                                        <br />点到像方焦点的距离）</button>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="tab-pane formula-1 clearfix" id="toujing-2">
-                                    <table class="table table-form table-form-a">
-                                        <tbody>
-                                            <tr>
-                                                <th>
-                                                    <label>n1（透镜1折射率）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                                <th>
-                                                    <label>SR1（透镜1外表面球半径）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label>n2（透镜2折射率）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                                <th>
-                                                    <label>SR2（胶合面球半径）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label>d1（透镜1中心厚度）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                                <th>
-                                                    <label>SR3（透镜2外表面球半径）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label>d2（透镜2中心厚度）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                                <th></th>
-                                                <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <table class="table table-form table-form-b">
-                                        <tbody>
-                                            <tr>
-                                                <th>
-                                                    <button class="btn btn-result">计算 f’（胶合透镜方焦距）</button>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <button class="btn btn-result">计算 bfl（胶合透镜后截距 l’f）</button>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <form action="" id="form-FocalLength">
+                                    <div class="tab-pane formula-1 clearfix" id="toujing-1">
+                                        <p class="help">说明：SR要带上“ ± ”号，按图纸以球心在右侧为正，有一面为平面则SR1（或SR2）输入0（或不输入，即空白）</p>
+                                        <table class="table table-form table-form-a">
+                                            <tbody>
+                                                <tr>
+                                                    <th>
+                                                        <label>d（中心厚度）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="d"/>
+                                                    </td>
+                                                    <th>
+                                                        <label>n（折射率）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="n"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label>SR1（1面球半径）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="sr1-1"/>
+                                                    </td>
+                                                    <th>
+                                                        <label>SR2（2面球半径）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text"  id="sr2-1"/>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-form table-form-b">
+                                            <tbody>
+                                                <tr>
+                                                    <th>
+                                                        <button class="btn btn-result" id="result-f-1">计算 f’（像方焦距）</button>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="resultF1"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <button class="btn btn-result btn-result-2l" id="result-d-1">计算 lf’（透镜表面顶
+                                                            <br />点到像方焦点的距离）</button>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="resultD1"/>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane formula-1 clearfix" id="toujing-2">
+                                        <table class="table table-form table-form-a">
+                                            <tbody>
+                                                <tr>
+                                                    <th>
+                                                        <label>n1（透镜1折射率）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="n1"/>
+                                                    </td>
+                                                    <th>
+                                                        <label>SR1（透镜1外表面球半径）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="sr1-2"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label>n2（透镜2折射率）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="n2"/>
+                                                    </td>
+                                                    <th>
+                                                        <label>SR2（胶合面球半径）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="sr2-2"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label>d1（透镜1中心厚度）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="d1"/>
+                                                    </td>
+                                                    <th>
+                                                        <label>SR3（透镜2外表面球半径）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="sr3-2"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label>d2（透镜2中心厚度）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="d2"/>
+                                                    </td>
+                                                    <th></th>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-form table-form-b">
+                                            <tbody>
+                                                <tr>
+                                                    <th>
+                                                        <button class="btn btn-result" id="result-f-2">计算 f’（胶合透镜方焦距）</button>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="resultF2"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <button class="btn btn-result" id="result-d-2">计算 bfl（胶合透镜后截距 l’f）</button>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="resultD2"/>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -312,9 +314,9 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
-    <script src="bower_components/jQuery-Validation-Engine/js/jquery.validationEngine.js"></script>
-    <script src="bower_components/jQuery-Validation-Engine/js/languages/jquery.jquery.validationEngine-zh_CN.js"></script>
     <!-- endbower -->
+    <script src="bower_components/jQuery-Validation-Engine/js/languages/jquery.validationEngine-zh_CN.js"></script>
+    <script src="bower_components/jQuery-Validation-Engine/js/jquery.validationEngine.js"></script>
     <!-- endbuild -->
     <!-- build:js({app,.tmp}) scripts/main.js -->
     <script src="scripts/main.js"></script>

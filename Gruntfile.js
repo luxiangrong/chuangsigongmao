@@ -1,4 +1,4 @@
-// Generated on 2015-04-22 using
+// Generated on 2015-03-05 using
 // generator-webapp 0.5.1
 'use strict';
 
@@ -75,7 +75,7 @@ module.exports = function (grunt) {
         open: true,
         livereload: 35729,
         // Change this to '0.0.0.0' to access the server from outside
-        hostname: 'localhost'
+        hostname: '127.0.0.1'
       },
       livereload: {
         options: {
@@ -193,7 +193,7 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         ignorePath: /^\/|\.\.\//,
-        src: ['<%= config.app %>/*.html']
+        src: ['<%= config.app %>/index.html']
       },
       sass: {
         src: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
@@ -429,9 +429,9 @@ module.exports = function (grunt) {
     'uglify',
     'copy:dist',
     'modernizr',
-    'rev',
+    // 'rev',
     'usemin',
-    'htmlmin'
+    // 'htmlmin'
   ]);
 
   grunt.registerTask('default', [

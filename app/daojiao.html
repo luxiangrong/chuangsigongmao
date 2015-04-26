@@ -10,8 +10,8 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/jQuery-Validation-Engine/css/validationEngine.jquery.css" />
     <!-- endbower -->
+    <link rel="stylesheet" href="bower_components/jQuery-Validation-Engine/css/validationEngine.jquery.css" />
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
@@ -107,55 +107,57 @@
                             <!-- Tab panes -->
                             <div class="formula-1">
                                 <p class="help mt-50">计算倒角角度，零件球面边缘与侧面夹角：</p>
-                                <table class="table table-condensed table-form table-form-a">
-                                    <tbody>
-                                        <tr>
-                                            <th>
-                                                <label> SR（倒角面球半径）</label>
-                                            </th>
-                                            <td>
-                                                <input type="text" />
-                                            </td>
-                                            <th>
-                                                <label>Φ（零件直径）</label>
-                                            </th>
-                                            <td>
-                                                <input type="text" />
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <table class="table table-condensed table-form table-form-b">
-                                    <tbody>
-                                        <tr>
-                                        	<th rowspan="3">
-												<img src="images/daojiao.jpg" height="178" width="155" alt="">
-                                        	</th>
-                                            <th>
-                                                <button class="btn btn-result">计算 β（夹角角度）</button>
-                                            </th>
-                                            <td>
-                                                <input type="text" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="ta-c">
-                                                <label>参考值： Φ / SR</label>
-                                            </th>
-                                            <td>
-                                                <input type="text" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                <button class="btn btn-result">计算 α（倒角角度）</button>
-                                            </th>
-                                            <td>
-                                                <input type="text" />
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <form action="" id="form-Chamfer">
+                                    <table class="table table-condensed table-form table-form-a">
+                                        <tbody>
+                                            <tr>
+                                                <th>
+                                                    <label> SR（倒角面球半径）</label>
+                                                </th>
+                                                <td>
+                                                    <input type="text" id="r"/>
+                                                </td>
+                                                <th>
+                                                    <label>Φ（零件直径）</label>
+                                                </th>
+                                                <td>
+                                                    <input type="text" id="d" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="table table-condensed table-form table-form-b">
+                                        <tbody>
+                                            <tr>
+                                                <th rowspan="3">
+                                                    <img src="images/daojiao.jpg" height="178" width="155" alt="">
+                                                </th>
+                                                <th>
+                                                    <button class="btn btn-result" id="result-b">计算 β（夹角角度）</button>
+                                                </th>
+                                                <td>
+                                                    <input type="text" id="resultB"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="ta-c">
+                                                    <label>参考值： Φ / SR</label>
+                                                </th>
+                                                <td>
+                                                    <input type="text" id="ref"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <button class="btn btn-result" id="result-a">计算 α（倒角角度）</button>
+                                                </th>
+                                                <td>
+                                                    <input type="text" id="resultA"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -221,9 +223,9 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
-    <script src="bower_components/jQuery-Validation-Engine/js/jquery.validationEngine.js"></script>
-    <script src="bower_components/jQuery-Validation-Engine/js/languages/jquery.jquery.validationEngine-zh_CN.js"></script>
     <!-- endbower -->
+    <script src="bower_components/jQuery-Validation-Engine/js/languages/jquery.validationEngine-zh_CN.js"></script>
+    <script src="bower_components/jQuery-Validation-Engine/js/jquery.validationEngine.js"></script>
     <!-- endbuild -->
     <!-- build:js({app,.tmp}) scripts/main.js -->
     <script src="scripts/main.js"></script>

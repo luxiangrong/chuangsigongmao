@@ -10,8 +10,8 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/jQuery-Validation-Engine/css/validationEngine.jquery.css" />
     <!-- endbower -->
+    <link rel="stylesheet" href="bower_components/jQuery-Validation-Engine/css/validationEngine.jquery.css" />
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
@@ -103,105 +103,106 @@
                             </ul>
                         </div>
                         <div class="col-formula">
-                            <h3>中心偏差计算（透射定心）</h3>
+                            <h3>角度长度换算</h3>
                             <!-- Tab panes -->
                             <div class="formula-1">
-                                <table class="table table-condensed table-form table-form-c">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <label>角度</label>
-                                            </td>
-                                            <td>
-                                                <input class="sm" type="text" />
-                                            </td>
-                                            <td style="width: 100px;">
-                                            	<button class="btn btn-result">转化 <img src="images/icon01.png" height="16" width="23" alt=""></button>
-                                            	<button class="btn btn-result"><img src="images/icon02.png" height="16" width="23" alt=""> 转化</button>
-                                            </td>
-                                            <td>
-                                                <input class="xs" type="text" />
-                                            </td>
-                                            <td>
-                                                <label>角度</label>
-                                            </td>
-                                            <td>
-                                                <input class="xs" type="text" />
-                                            </td>
-                                            <td>
-                                                <label>角度</label>
-                                            </td>
-                                            <td>
-                                                <input class="sm" type="text" />
-                                            </td>
-                                            <td>
-                                                <label>角度</label>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                                <table class="table table-condensed table-form table-form-c">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <label>角度</label>
-                                            </td>
-                                            <td>
-                                                <input class="md" type="text" />
-                                            </td>
-                                            <td>
-                                            	<button class="btn btn-result">转化 <img src="images/icon01.png" height="16" width="23" alt=""></button>
-                                            	<br/>
-                                            	<button class="btn btn-result"><img src="images/icon02.png" height="16" width="23" alt=""> 转化</button>
-                                            </td>
-                                            <td>
-                                                <input class="md" type="text" />
-                                            </td>
-                                            <td>
-                                                <label>弧度</label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label>英寸</label>
-                                            </td>
-                                            <td>
-                                                <input class="md" type="text" />
-                                            </td>
-                                            <td>
-                                            	<button class="btn btn-result">转化 <img src="images/icon01.png" height="16" width="23" alt=""></button>
-                                            	<br/>
-                                            	<button class="btn btn-result"><img src="images/icon02.png" height="16" width="23" alt=""> 转化</button>
-                                            </td>
-                                            <td>
-                                                <input class="md" type="text" />
-                                            </td>
-                                            <td>
-                                                <label>毫米</label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label>屈光度</label>
-                                            </td>
-                                            <td>
-                                                <input class="md" type="text" />
-                                            </td>
-                                            <td>
-                                            	<button class="btn btn-result">转化 <img src="images/icon01.png" height="16" width="23" alt=""></button>
-                                            	<br/>
-                                            	<button class="btn btn-result"><img src="images/icon02.png" height="16" width="23" alt=""> 转化</button>
-                                            </td>
-                                            <td>
-                                                <input class="md" type="text" />
-                                            </td>
-                                            <td>
-                                                <label>f’(焦距mm)</label>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <form action="" id="form-Switch">
+                                    <table class="table table-condensed table-form table-form-c">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <label>角度</label>
+                                                </td>
+                                                <td>
+                                                    <input class="sm" type="text" id="a1"/>
+                                                </td>
+                                                <td style="width: 100px;">
+                                                    <button class="btn btn-result" id="switchA">转化 <img src="images/icon01.png" height="16" width="23" alt=""></button>
+                                                    <button class="btn btn-result" id="switchB"><img src="images/icon02.png" height="16" width="23" alt=""> 转化</button>
+                                                </td>
+                                                <td>
+                                                    <input class="xs" type="text" id="h" />
+                                                </td>
+                                                <td>
+                                                    <label>度</label>
+                                                </td>
+                                                <td>
+                                                    <input class="xs" type="text" id="m" />
+                                                </td>
+                                                <td>
+                                                    <label>分</label>
+                                                </td>
+                                                <td>
+                                                    <input class="sm" type="text" id="s" />
+                                                </td>
+                                                <td>
+                                                    <label>秒</label>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="table table-condensed table-form table-form-c">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <label>角度</label>
+                                                </td>
+                                                <td>
+                                                    <input class="md" type="text" id="a2"/>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-result" id="switchC">转化 <img src="images/icon01.png" height="16" width="23" alt=""></button>
+                                                    <br/>
+                                                    <button class="btn btn-result" id="switchD"><img src="images/icon02.png" height="16" width="23" alt=""> 转化</button>
+                                                </td>
+                                                <td>
+                                                    <input class="md" type="text" id="r"/>
+                                                </td>
+                                                <td>
+                                                    <label>弧度</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label>英寸</label>
+                                                </td>
+                                                <td>
+                                                    <input class="md" type="text" id="i"/>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-result" id="switchE">转化 <img src="images/icon01.png" height="16" width="23" alt=""></button>
+                                                    <br/>
+                                                    <button class="btn btn-result" id="switchF"><img src="images/icon02.png" height="16" width="23" alt=""> 转化</button>
+                                                </td>
+                                                <td>
+                                                    <input class="md" type="text" id="mm"/>
+                                                </td>
+                                                <td>
+                                                    <label>毫米</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label>屈光度</label>
+                                                </td>
+                                                <td>
+                                                    <input class="md" type="text" id="d"/>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-result" id="switchG">转化 <img src="images/icon01.png" height="16" width="23" alt=""></button>
+                                                    <br/>
+                                                    <button class="btn btn-result" id="switchH"><img src="images/icon02.png" height="16" width="23" alt=""> 转化</button>
+                                                </td>
+                                                <td>
+                                                    <input class="md" type="text" id="f"/>
+                                                </td>
+                                                <td>
+                                                    <label>f’(焦距mm)</label>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -267,9 +268,9 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
-    <script src="bower_components/jQuery-Validation-Engine/js/jquery.validationEngine.js"></script>
-    <script src="bower_components/jQuery-Validation-Engine/js/languages/jquery.jquery.validationEngine-zh_CN.js"></script>
     <!-- endbower -->
+    <script src="bower_components/jQuery-Validation-Engine/js/languages/jquery.validationEngine-zh_CN.js"></script>
+    <script src="bower_components/jQuery-Validation-Engine/js/jquery.validationEngine.js"></script>
     <!-- endbuild -->
     <!-- build:js({app,.tmp}) scripts/main.js -->
     <script src="scripts/main.js"></script>

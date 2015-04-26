@@ -10,8 +10,8 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/jQuery-Validation-Engine/css/validationEngine.jquery.css" />
     <!-- endbower -->
+    <link rel="stylesheet" href="bower_components/jQuery-Validation-Engine/css/validationEngine.jquery.css" />
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
@@ -113,140 +113,142 @@
                             </div>
                             <!-- Tab panes -->
                             <div class="tab-panes">
-                                <div class="tab-pane formula-1 clearfix" id="toujing-1">
-                                    <table class="table table-condensed table-form table-form-a">
-                                        <tbody>
-                                            <tr>
-                                                <th>
-                                                    <label>  λ（观察光波长）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                                <th>
-                                                    <label>Φ（直径，取较小者）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                            <tr class="separate">
-                                                <th>
-                                                    <label>SR1（样板球半径）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                                <th>
-                                                    <button class="btn btn-result">计算 N（凹光圈）</button>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label>SR2（元件球半径）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                                <th>
-                                                    <button class="btn btn-result">计算 N（凸光圈）</button>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                            <tr class="separate">
-                                                <th>
-                                                    <label>△SR（半径偏差）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                                <th>
-                                                    <button class="btn btn-result">计算 N（凹光圈）</button>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label>SR（已知球半径）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                                <th>
-                                                    <button class="btn btn-result">计算 N（凸光圈）</button>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                            <tr class="separate">
-                                                <th>
-                                                    <label>N（光圈数，有±号）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                                <th rowspan="2">
-                                                    <button class="btn btn-result">计算△SR（半径偏差）</button>
-                                                </th>
-                                                <td rowspan="2">
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label>  SR（已知球半径）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="tab-pane formula-1 clearfix" id="toujing-2">
-                                    <table class="table table-form table-form-a mt-50">
-                                        <tbody>
-                                            <tr>
-                                               <th>
-                                                    <label>Φ1（原始直径）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                                <th rowspan="3">
-                                                    <button class="btn btn-result">N2（观察光圈数）</button>
-                                                </th>
-                                                <td rowspan="3">
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label>Φ2（观察直径）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label>N1（原始光圈数）</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" />
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <form action="" id="form-aperture">
+                                    <div class="tab-pane formula-1 clearfix" id="toujing-1">
+                                        <table class="table table-condensed table-form table-form-a">
+                                            <tbody>
+                                                <tr>
+                                                    <th>
+                                                        <label> λ（观察光波长）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="l" />
+                                                    </td>
+                                                    <th>
+                                                        <label>Φ（直径，取较小者）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="d1" />
+                                                    </td>
+                                                </tr>
+                                                <tr class="separate">
+                                                    <th>
+                                                        <label>SR1（样板球半径）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="SR1" />
+                                                    </td>
+                                                    <th>
+                                                        <button class="btn btn-result" id="result-n1">计算 N（凹光圈）</button>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="resultN1" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label>SR2（元件球半径）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="SR2" />
+                                                    </td>
+                                                    <th>
+                                                        <button class="btn btn-result" id="result-n2">计算 N（凸光圈）</button>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="resultN2" />
+                                                    </td>
+                                                </tr>
+                                                <tr class="separate">
+                                                    <th>
+                                                        <label>△SR（半径偏差）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="dSR" />
+                                                    </td>
+                                                    <th>
+                                                        <button class="btn btn-result" id="result-n3">计算 N（凹光圈）</button>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="resultN3" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label>SR（已知球半径）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="SR3" />
+                                                    </td>
+                                                    <th>
+                                                        <button class="btn btn-result" id="result-n4">计算 N（凸光圈）</button>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="resultN4" />
+                                                    </td>
+                                                </tr>
+                                                <tr class="separate">
+                                                    <th>
+                                                        <label>N（光圈数，有±号）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="n1" />
+                                                    </td>
+                                                    <th rowspan="2">
+                                                        <button class="btn btn-result" id="result-dsr">计算△SR（半径偏差）</button>
+                                                    </th>
+                                                    <td rowspan="2">
+                                                        <input type="text" id="resultDSR" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label> SR（已知球半径）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="SR4" />
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane formula-1 clearfix" id="toujing-2">
+                                        <table class="table table-form table-form-a mt-50">
+                                            <tbody>
+                                                <tr>
+                                                    <th>
+                                                        <label>Φ1（原始直径）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="d2" />
+                                                    </td>
+                                                    <th rowspan="3">
+                                                        <button class="btn btn-result" id="result-n5">N2（观察光圈数）</button>
+                                                    </th>
+                                                    <td rowspan="3">
+                                                        <input type="text" id="resultN5" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label>Φ2（观察直径）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="d3" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label>N1（原始光圈数）</label>
+                                                    </th>
+                                                    <td>
+                                                        <input type="text" id="n2" />
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -312,9 +314,9 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
-    <script src="bower_components/jQuery-Validation-Engine/js/jquery.validationEngine.js"></script>
-    <script src="bower_components/jQuery-Validation-Engine/js/languages/jquery.jquery.validationEngine-zh_CN.js"></script>
     <!-- endbower -->
+    <script src="bower_components/jQuery-Validation-Engine/js/languages/jquery.validationEngine-zh_CN.js"></script>
+    <script src="bower_components/jQuery-Validation-Engine/js/jquery.validationEngine.js"></script>
     <!-- endbuild -->
     <!-- build:js({app,.tmp}) scripts/main.js -->
     <script src="scripts/main.js"></script>
