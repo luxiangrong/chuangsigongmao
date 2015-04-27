@@ -380,10 +380,6 @@
         //计算像方焦距
         //f`=(n*SR1*SR2)/[(n-1)*(n(SR2-SR1)+(n-1)*d)]
         f1: function(d, n, sr1, sr2) {
-            console.log(d);
-            console.log(n);
-            console.log(sr1);
-            console.log(sr2);
             return (n * sr1 * sr2) / ((n - 1) * (n * (sr2 - sr1) + (n - 1) * d));
         },
         //计算lf`（透镜表面顶点到像方焦点距离）
@@ -395,6 +391,11 @@
         //f`=f1`*f2`/(f1`+f2`-d)                 其中f1`和f2`的算法参见像方焦距计算
         f2: function(d, f1, f2) {
             return f1 * f2 / (f1 + f2 - d);
+        },
+        //bfl（胶合透镜后截距 l’f）
+        //bfl =f’(1-d/f1’)，  f1’是第一片透镜的焦距；
+        d2: function(f, d, f1){
+            return f * (1 - d / f1);
         }
     };
     //像方焦距
@@ -477,7 +478,7 @@
 
     });
 
-    //透镜表面顶点到像方焦点的距离
+    //计算 f’（胶合透镜方焦距）
     $('#form-FocalLength #result-f-2').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
@@ -508,11 +509,68 @@
             var d2 = Number($('#form-FocalLength #d2').val());
             var sr1 = Number($('#form-FocalLength #sr1-2').val());
             var sr2 = Number($('#form-FocalLength #sr2-2').val());
-            var sr2 = Number($('#form-FocalLength #sr3-2').val());
+            var sr3 = Number($('#form-FocalLength #sr3-2').val());
 
             if (n1 > 1 && n2 > 1 && d1 > 0 && d2 > 0) {
                 $('#form-FocalLength #d, #form-FocalLength #n').validationEngine('hide');
-                $('#form-FocalLength #resultD1').val(FocalLength.f2(d1 + d2, FocalLength.f1(d1, n1, sr1, sr2), FocalLength.f1(d2, n2, sr2, sr3)));
+                $('#form-FocalLength #resultF2').val(FocalLength.f2(d1 + d2, FocalLength.f1(d1, n1, sr1, sr2), FocalLength.f1(d2, n2, sr2, sr3)));
+            } else {
+                if (n1 <= 1) {
+                    $('#form-FocalLength #n1').validationEngine('showPrompt', ' 参数限定条件：n > 1', 'error', 'topRight', true);
+                }
+                if (n2 <= 1) {
+                    $('#form-FocalLength #n2').validationEngine('showPrompt', ' 参数限定条件：n > 1', 'error', 'topRight', true);
+                }
+                if (d1 <= 0) {
+                    $('#form-FocalLength #d1').validationEngine('showPrompt', ' 参数限定条件：d > 0', 'error', 'topRight', true);
+                }
+                if (d2 <= 0) {
+                    $('#form-FocalLength #d2').validationEngine('showPrompt', ' 参数限定条件：d > 0', 'error', 'topRight', true);
+                }
+            }
+        }
+
+    });
+
+    //计算 f’（胶合透镜方焦距）
+    $('#form-FocalLength #result-d-2').on('click', function(e) {
+        e.preventDefault();
+        //移除之前的验证规则
+        $('#form-FocalLength input').each(function(data, i) {
+            removeValidateRule($(this));
+        });
+        $('#form-FocalLength').validationEngine('hideAll');
+
+        $('#form-FocalLength #n1').addClass('validate[required,custom[number]]');
+        $('#form-FocalLength #n2').addClass('validate[required,custom[number]]');
+        $('#form-FocalLength #d1').addClass('validate[required,custom[number]]');
+        $('#form-FocalLength #d2').addClass('validate[required,custom[number]]');
+        $('#form-FocalLength #sr1-2').addClass('validate[required,custom[number]]');
+        $('#form-FocalLength #sr2-2').addClass('validate[required,custom[number]]');
+        $('#form-FocalLength #sr3-2').addClass('validate[required,custom[number]]');
+
+        if (!$('#form-FocalLength #n1').validationEngine('validate') &&
+            !$('#form-FocalLength #n2').validationEngine('validate') &&
+            !$('#form-FocalLength #d1').validationEngine('validate') &&
+            !$('#form-FocalLength #d2').validationEngine('validate') &&
+            !$('#form-FocalLength #sr1-2').validationEngine('validate') &&
+            !$('#form-FocalLength #sr2-2').validationEngine('validate') &&
+            !$('#form-FocalLength #sr3-2').validationEngine('validate')
+        ) {
+            var n1 = Number($('#form-FocalLength #n1').val());
+            var n2 = Number($('#form-FocalLength #n2').val());
+            var d1 = Number($('#form-FocalLength #d1').val());
+            var d2 = Number($('#form-FocalLength #d2').val());
+            var sr1 = Number($('#form-FocalLength #sr1-2').val());
+            var sr2 = Number($('#form-FocalLength #sr2-2').val());
+            var sr3 = Number($('#form-FocalLength #sr3-2').val());
+
+            if (n1 > 1 && n2 > 1 && d1 > 0 && d2 > 0) {
+                $('#form-FocalLength #d, #form-FocalLength #n').validationEngine('hide');
+                //bfl =f’(1-d/f1’)，  f1’是第一片透镜的焦距；
+                var f = FocalLength.f2(d1 + d2, FocalLength.f1(d1, n1, sr1, sr2), FocalLength.f1(d2, n2, sr2, sr3));
+                var f1 = FocalLength.f1(d1, n1, sr1, sr2);
+                $('#form-FocalLength #resultD2').val(FocalLength.d2(f, d1+d2, f1));
             } else {
                 if (n1 <= 1) {
                     $('#form-FocalLength #n1').validationEngine('showPrompt', ' 参数限定条件：n > 1', 'error', 'topRight', true);
@@ -1073,7 +1131,6 @@
             var d = Number($('#form-Arrangement #d').val());
             var c = $('#form-Arrangement #c').val();
             var m = c.split('-')[0];
-            console.log(m)
             $('#form-Arrangement #m').val( Arrangement[c]);
             $('#form-Arrangement #Di').val(Arrangement['c'+ m](d, m));
         }
