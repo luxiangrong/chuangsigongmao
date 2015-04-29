@@ -394,7 +394,7 @@
         },
         //bfl（胶合透镜后截距 l’f）
         //bfl =f’(1-d/f1’)，  f1’是第一片透镜的焦距；
-        d2: function(f, d, f1){
+        d2: function(f, d, f1) {
             return f * (1 - d / f1);
         }
     };
@@ -570,7 +570,7 @@
                 //bfl =f’(1-d/f1’)，  f1’是第一片透镜的焦距；
                 var f = FocalLength.f2(d1 + d2, FocalLength.f1(d1, n1, sr1, sr2), FocalLength.f1(d2, n2, sr2, sr3));
                 var f1 = FocalLength.f1(d1, n1, sr1, sr2);
-                $('#form-FocalLength #resultD2').val(FocalLength.d2(f, d1+d2, f1));
+                $('#form-FocalLength #resultD2').val(FocalLength.d2(f, d1 + d2, f1));
             } else {
                 if (n1 <= 1) {
                     $('#form-FocalLength #n1').validationEngine('showPrompt', ' 参数限定条件：n > 1', 'error', 'topRight', true);
@@ -611,9 +611,16 @@
         //计算边缘厚度差Δt
         //Δt=Φ*tan[c/(0.001*0.29*(n-1)*lf'*60)]
         t: function(d, c, n, f) {
+            // console.log(d);
+            // console.log(c);
+            // console.log(n);
+            // console.log(f);
             return d * Math.tan(c / (0.001 * 0.29 * (n - 1) * f * 60));
         }
     };
+
+    // console.log(CenterDeviation.t(25.4, 0.05, 1.51637, 150));
+
     //计算中心偏差C
     $('#form-CenterDeviation #result-c-1').on('click', function(e) {
         e.preventDefault();
@@ -756,7 +763,7 @@
         //计算β（面切线方向与零件外圆夹角角度）
         //β=arccos(Φ/2/SR）
         b: function(r, d) {
-            return Math.acos(d / 2 / r);
+            return Math.acos(d / 2 / r) / Math.PI * 180;
         },
         //计算α倒角角度
         //当Φ/SR＜0.7时，α=45°，当0.7≤Φ/SR＜1.5时，α=30°，当1.5≤Φ/SR＜2时，α=不倒角
@@ -796,7 +803,7 @@
 
             if (r > 0 && d > 0) {
                 $('#form-Chamfer #r, #form-Chamfer #d').validationEngine('hide');
-                $('#form-Chamfer #resultB').val(Chamfer.b(r, d) * 180);
+                $('#form-Chamfer #resultB').val(Chamfer.b(r, d));
             } else {
                 if (r <= 0) {
                     $('#form-Chamfer #r').validationEngine('showPrompt', ' 参数限定条件：r > 0', 'error', 'topRight', true);
@@ -859,7 +866,7 @@
             }
         },
         //角度=度+（分+秒/60）/60"
-        angleB: function(h,m,s) {
+        angleB: function(h, m, s) {
             return h + (m + s / 60) / 60;
         },
         //弧度=（角度/180）*3.1415926；
@@ -897,8 +904,7 @@
 
         $('#form-Switch #a1').addClass('validate[required,min[0],custom[number]]');
 
-        if (!$('#form-Switch #a1').validationEngine('validate') 
-        ) {
+        if (!$('#form-Switch #a1').validationEngine('validate')) {
             console.log('ok');
             var a = Number($('#form-Switch #a1').val());
 
@@ -930,15 +936,15 @@
         $('#form-Switch #m').addClass('validate[min[0],custom[number]]');
         $('#form-Switch #s').addClass('validate[min[0],custom[number]]');
 
-        if (!$('#form-Switch #h').validationEngine('validate')  &&
-            !$('#form-Switch #m').validationEngine('validate')  &&
+        if (!$('#form-Switch #h').validationEngine('validate') &&
+            !$('#form-Switch #m').validationEngine('validate') &&
             !$('#form-Switch #s').validationEngine('validate')
         ) {
             var h = Number($('#form-Switch #h').val());
             var m = Number($('#form-Switch #m').val());
             var s = Number($('#form-Switch #s').val());
 
-            $('#form-Switch #a1').val( Switch.angleB(h,m,s));
+            $('#form-Switch #a1').val(Switch.angleB(h, m, s));
         }
 
     });
@@ -953,8 +959,7 @@
 
         $('#form-Switch #a2').addClass('validate[required,custom[number]]');
 
-        if (!$('#form-Switch #a2').validationEngine('validate') 
-        ) {
+        if (!$('#form-Switch #a2').validationEngine('validate')) {
             var a = Number($('#form-Switch #a2').val());
             $('#form-Switch #r').val(Switch.a2r(a));
         }
@@ -969,8 +974,7 @@
 
         $('#form-Switch #r').addClass('validate[required,custom[number]]');
 
-        if (!$('#form-Switch #r').validationEngine('validate') 
-        ) {
+        if (!$('#form-Switch #r').validationEngine('validate')) {
             var r = Number($('#form-Switch #r').val());
             $('#form-Switch #a2').val(Switch.r2a(r));
         }
@@ -987,11 +991,10 @@
 
         $('#form-Switch #i').addClass('validate[required,min[0],custom[number]]');
 
-        if (!$('#form-Switch #i').validationEngine('validate')
-        ) {
+        if (!$('#form-Switch #i').validationEngine('validate')) {
             var i = Number($('#form-Switch #i').val());
 
-            $('#form-Switch #mm').val( Switch.i2m(i));
+            $('#form-Switch #mm').val(Switch.i2m(i));
         }
 
     });
@@ -1006,10 +1009,9 @@
 
         $('#form-Switch #mm').addClass('validate[required,min[0],custom[number]]');
 
-        if (!$('#form-Switch #mm').validationEngine('validate')
-        ) {
+        if (!$('#form-Switch #mm').validationEngine('validate')) {
             var mm = Number($('#form-Switch #mm').val());
-            $('#form-Switch #i').val( Switch.m2i(mm));
+            $('#form-Switch #i').val(Switch.m2i(mm));
         }
 
     });
@@ -1024,10 +1026,9 @@
 
         $('#form-Switch #d').addClass('validate[required,custom[number]]');
 
-        if (!$('#form-Switch #d').validationEngine('validate')
-        ) {
+        if (!$('#form-Switch #d').validationEngine('validate')) {
             var d = Number($('#form-Switch #d').val());
-            $('#form-Switch #f').val( Switch.d2f(d));
+            $('#form-Switch #f').val(Switch.d2f(d));
         }
 
     });
@@ -1041,10 +1042,9 @@
 
         $('#form-Switch #f').addClass('validate[required,custom[number]]');
 
-        if (!$('#form-Switch #f').validationEngine('validate')
-        ) {
+        if (!$('#form-Switch #f').validationEngine('validate')) {
             var f = Number($('#form-Switch #f').val());
-            $('#form-Switch #d').val( Switch.f2d(f));
+            $('#form-Switch #d').val(Switch.f2d(f));
         }
 
     });
@@ -1054,16 +1054,16 @@
             return 0.05 * d;
         },
         //D=（2*m-1)*Φ+2*（m-1）*0.05*Φ
-        c1: function (d, m) {
-            return (2 * m - 1) * d + 2* (m-1) * 0.05 * d;
+        c1: function(d, m) {
+            return (2 * m - 1) * d + 2 * (m - 1) * 0.05 * d;
         },
         //D=2[(m+(0.134*Φ+0.05*Φ）/1.732）*Φ+（m-1）*0.05*Φ]
         c3: function(d, m) {
-            return 2 * ( (m + (0.134* d + 0.05 * d) / 1.732) * d + (m-1) * 0.05 * d);
+            return 2 * ((m + (0.134 * d + 0.05 * d) / 1.732) * d + (m - 1) * 0.05 * d);
         },
         //D=2[(m+(0.293*Φ+0.05*Φ）/1.414）*Φ+（m-1）*0.05*Φ]
         c4: function(d, m) {
-            return 2 * ( ( m + (0.293 * d + 0.05 * d) / 1.414) * d + (m-1) * 0.05 * d);
+            return 2 * ((m + (0.293 * d + 0.05 * d) / 1.414) * d + (m - 1) * 0.05 * d);
         },
         //排列方法：1个 D=（2*m-1)*Φ+2*（m-1）*0.05*Φ；d=0.05*Φ
         '1-1': '1个',
@@ -1103,21 +1103,21 @@
         '3-12': '3+9+15+22+28+34+41+47+53+59+66+72=449个',
         '4-12': '4+10+17+23+29+35+42+48+54+60+67+73=462个'
     };
-    $('#form-Arrangement #d').on('change', function(){
+
+    $('#form-Arrangement #d').on('change', function() {
         $('#form-Arrangement input').each(function(data, i) {
             removeValidateRule($(this));
         });
 
         $('#form-Arrangement #d').addClass('validate[required,custom[number]]');
 
-        if (!$('#form-Arrangement #d').validationEngine('validate')
-        ) {
+        if (!$('#form-Arrangement #d').validationEngine('validate')) {
             var d = Number($('#form-Arrangement #d').val());
-            $('#form-Arrangement #dis').val( Arrangement.dis(d));
+            $('#form-Arrangement #dis').val(Arrangement.dis(d));
         }
     });
 
-    $('#form-Arrangement #c').on('change', function(){
+    $('#form-Arrangement #c').on('change', function() {
         $('#form-Arrangement input').each(function(data, i) {
             removeValidateRule($(this));
         });
@@ -1130,9 +1130,9 @@
         ) {
             var d = Number($('#form-Arrangement #d').val());
             var c = $('#form-Arrangement #c').val();
-            var m = c.split('-')[0];
-            $('#form-Arrangement #m').val( Arrangement[c]);
-            $('#form-Arrangement #Di').val(Arrangement['c'+ m](d, m));
+            var m = Number(c.split('-')[0]);
+            $('#form-Arrangement #m').val(Arrangement[c]);
+            $('#form-Arrangement #Di').val(Arrangement['c' + m](d, m));
         }
     });
 
