@@ -136,13 +136,19 @@
     // 计算凹光圈
     // （2/λ）*[sqrt(1-(Φ/2*SR1)^2)-1]*(SR1-SR2)
     var calcRecessedAperture = function(l, d, sr1, sr2) {
-        return (2 / l) * (Math.sqrt(1 - (Math.pow(d / 2 * sr1, 2))) - 1) * (sr1 - sr2);
+        return (2 / l) * (Math.sqrt(1 - (Math.pow(d / 2 / sr1, 2))) - 1) * (sr1 - sr2);
     };
     // 计算凸光圈
     // （2/λ）*[1-sqrt(1-(Φ/2*SR1)^2)]*(SR1-SR2)
     var calcConvexAperture = function(l, d, sr1, sr2) {
-        return (2 / l) * (1 - Math.sqrt(1 - Math.pow(d / 2 * sr1, 2))) * (sr1 - sr2);
+        return (2 / l) * (1 - Math.sqrt(1 - Math.pow(d / 2 / sr1, 2))) * (sr1 - sr2);
     };
+    var calcRecessedAperture2 = function(l,d, sr1, dsr) {
+        return (2 / l) * (Math.sqrt(1 - (Math.pow(d / 2 / sr1, 2))) - 1) * dsr;
+    };
+    var calcConvexAperture2 = function(l,d, sr1, dsr) {
+        return (2 / l) * (1 - Math.sqrt(1 - Math.pow(d / 2 / sr1, 2))) * dsr;
+    }
     // 计算ΔSR
     // (4*λ*SR1*SR1*N）/（Φ*Φ）
     var calcDeviationSR = function(l, sr1, n, d) {
@@ -260,7 +266,7 @@
 
             if (sr1 > 0 && sr2 > 0) {
                 $('#form-aperture #dSR, #form-aperture #SR3').validationEngine('hide');
-                $('#form-aperture #resultN3').val(calcRecessedAperture(l, d, sr1, sr2));
+                $('#form-aperture #resultN3').val(calcRecessedAperture2(l, d, sr2, sr1));
             } else {
                 if (sr1 <= 0) {
                     $('#form-aperture #dSR').validationEngine('showPrompt', ' 参数限定条件：SR > 0', 'error', 'topRight', true);
@@ -299,7 +305,7 @@
 
             if (sr1 > 0 && sr2 > 0) {
                 $('#form-aperture #dSR, #form-aperture #SR3').validationEngine('hide');
-                $('#form-aperture #resultN4').val(calcConvexAperture(l, d, sr1, sr2));
+                $('#form-aperture #resultN4').val(calcConvexAperture2(l, d, sr2, sr1));
             } else {
                 if (sr1 <= 0) {
                     $('#form-aperture #dSR').validationEngine('showPrompt', ' 参数限定条件：SR > 0', 'error', 'topRight', true);
