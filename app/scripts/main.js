@@ -612,16 +612,12 @@
         //计算中心偏差C
         //c=0.29(n-1)×lf’×60×arctg(Δt/Φ)×0.001
         c2: function(n, f, t, d) {
-            return 0.29 * (n - 1) * f * 60 * Math.atan(t / d) * 0.001;
+            return 0.29 * (n - 1) * f * 60 * Math.atan(t / d / 180 * Math.PI) * 0.001;
         },
         //计算边缘厚度差Δt
         //Δt=Φ*tan[c/(0.001*0.29*(n-1)*lf'*60)]
         t: function(d, c, n, f) {
-            // console.log(d);
-            // console.log(c);
-            // console.log(n);
-            // console.log(f);
-            return d * Math.tan(c / (0.001 * 0.29 * (n - 1) * f * 60));
+            return d * Math.tan(c / (0.001 * 0.29 * (n - 1) * f * 60) / 180 * Math.PI);
         }
     };
 
