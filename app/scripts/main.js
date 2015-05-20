@@ -58,12 +58,9 @@
             var r = Number($('#form-hrd #r').val()) || 0;
             var d = Number($('#form-hrd #d').val()) || 0;
 
-            if (r <= d) {
-                $('#form-hrd #h').validationEngine('hide');
-                $('#form-hrd #h').val(calcRise(r, d));
-            } else {
-                $('#form-hrd #h').validationEngine('showPrompt', ' 参数限定条件：SR ≤ Φ', 'error', 'centerRight', false);
-            }
+            $('#form-hrd #h').validationEngine('hide');
+            $('#form-hrd #h').val(calcRise(r, d));
+
         } else {
             $('#form-hrd #h').val('');
         }
@@ -134,23 +131,25 @@
      * 光圈计算
      *************************/
     // 计算凹光圈
-    // （2/λ）*[sqrt(1-(Φ/2*SR1)^2)-1]*(SR1-SR2)
+    // （2/λ）*[1/sqrt(1-(Φ/（SR1+SR2))^2)-1]*(SR1-SR2)
     var calcRecessedAperture = function(l, d, sr1, sr2) {
-        return (2 / l) * (Math.sqrt(1 - (Math.pow(d / 2 / sr1, 2))) - 1) * (sr1 - sr2);
+        return (2 / l) * (1 / Math.sqrt(1 - Math.pow(d / (sr1 + sr2), 2)) - 1) * (sr1 - sr2);
     };
     // 计算凸光圈
+    // （2/λ）*[1-sqrt(1-(Φ/(SR1+SR2))^2)]*(SR1-SR2)
     // （2/λ）*[1-sqrt(1-(Φ/2*SR1)^2)]*(SR1-SR2)
     var calcConvexAperture = function(l, d, sr1, sr2) {
-        return (2 / l) * (1 - Math.sqrt(1 - Math.pow(d / 2 / sr1, 2))) * (sr1 - sr2);
+        return (2 / l) * (1 - Math.sqrt(1 - Math.pow(d / (sr1 + sr2), 2))) * (sr1 - sr2);
+        // return (2 / l) * (1 - Math.sqrt(1 - Math.pow(d / 2 / sr1, 2))) * (sr1 - sr2);
     };
-    var calcRecessedAperture2 = function(l,d, sr1, dsr) {
+    var calcRecessedAperture2 = function(l, d, sr1, dsr) {
         return (2 / l) * (Math.sqrt(1 - (Math.pow(d / 2 / sr1, 2))) - 1) * dsr;
     };
-    var calcConvexAperture2 = function(l,d, sr1, dsr) {
-        return (2 / l) * (1 - Math.sqrt(1 - Math.pow(d / 2 / sr1, 2))) * dsr;
-    }
-    // 计算ΔSR
-    // (4*λ*SR1*SR1*N）/（Φ*Φ）
+    var calcConvexAperture2 = function(l, d, sr1, dsr) {
+            return (2 / l) * (1 - Math.sqrt(1 - Math.pow(d / 2 / sr1, 2))) * dsr;
+        }
+        // 计算ΔSR
+        // (4*λ*SR1*SR1*N）/（Φ*Φ）
     var calcDeviationSR = function(l, sr1, n, d) {
         return (4 * l * sr1 * sr1 * n) / (d * d);
     };
@@ -393,6 +392,11 @@
         d: function(d, n, sr1, sr2) {
             return (n * sr1 * sr2) / ((n - 1) * (n * (sr2 - sr1) + (n - 1) * d)) - d * sr2 / (n * (sr2 - sr1) + (n - 1) * d);
         },
+        //2个透镜的间隔距离 
+        //d= lf1'+lf2 = SR2*d1/(n1(SR2-SR1)+(n1-1)*d1)-SR2*d2/(n2(SR3-SR2)+(n2-1)*d2)
+        d3: function(d1, d2, n1, n2, sr1, sr2, sr3) {
+            return sr2 * d1 / (n1 * (sr2 - sr1) + (n1 - 1) * d1) - sr2 * d2 / (n2 * (sr3 - sr2) + (n2 - 1) * d2);
+        },
         //计算胶合像方焦距
         //f`=f1`*f2`/(f1`+f2`-d)                 其中f1`和f2`的算法参见像方焦距计算
         f2: function(d, f1, f2) {
@@ -415,8 +419,8 @@
 
         $('#form-FocalLength #d').addClass('validate[required,custom[number]]');
         $('#form-FocalLength #n').addClass('validate[required,custom[number]]');
-        $('#form-FocalLength #sr1-1').addClass('validate[required,custom[number]]');
-        $('#form-FocalLength #sr2-1').addClass('validate[required,custom[number]]');
+        $('#form-FocalLength #sr1-1').addClass('validate[custom[number]]');
+        $('#form-FocalLength #sr2-1').addClass('validate[custom[number]]');
 
         if (!$('#form-FocalLength #d').validationEngine('validate') &&
             !$('#form-FocalLength #n').validationEngine('validate') &&
@@ -425,8 +429,10 @@
         ) {
             var d = Number($('#form-FocalLength #d').val());
             var n = Number($('#form-FocalLength #n').val());
-            var sr1 = Number($('#form-FocalLength #sr1-1').val());
-            var sr2 = Number($('#form-FocalLength #sr2-1').val());
+            var sr1 = Number($('#form-FocalLength #sr1-1').val()) === 0 ? 999999999 : Number($('#form-FocalLength #sr1-1').val());
+            var sr2 = Number($('#form-FocalLength #sr2-1').val()) === 0 ? 999999999 : Number($('#form-FocalLength #sr2-1').val());
+
+            console.log(sr1);
 
             $('#form-aperture #resultN5').val(calcN2(n, d1, d2));
 
@@ -456,8 +462,8 @@
 
         $('#form-FocalLength #d').addClass('validate[required,custom[number]]');
         $('#form-FocalLength #n').addClass('validate[required,custom[number]]');
-        $('#form-FocalLength #sr1-1').addClass('validate[required,custom[number]]');
-        $('#form-FocalLength #sr2-1').addClass('validate[required,custom[number]]');
+        $('#form-FocalLength #sr1-1').addClass('validate[custom[number]]');
+        $('#form-FocalLength #sr2-1').addClass('validate[custom[number]]');
 
         if (!$('#form-FocalLength #d').validationEngine('validate') &&
             !$('#form-FocalLength #n').validationEngine('validate') &&
@@ -466,8 +472,8 @@
         ) {
             var d = Number($('#form-FocalLength #d').val());
             var n = Number($('#form-FocalLength #n').val());
-            var sr1 = Number($('#form-FocalLength #sr1-1').val());
-            var sr2 = Number($('#form-FocalLength #sr2-1').val());
+            var sr1 = Number($('#form-FocalLength #sr1-1').val()) === 0 ? 999999999 : Number($('#form-FocalLength #sr1-1').val());
+            var sr2 = Number($('#form-FocalLength #sr2-1').val()) === 0 ? 999999999 : Number($('#form-FocalLength #sr2-1').val());
 
             if (n > 1 && d > 0) {
                 $('#form-FocalLength #d, #form-FocalLength #n').validationEngine('hide');
@@ -519,7 +525,7 @@
 
             if (n1 > 1 && n2 > 1 && d1 > 0 && d2 > 0) {
                 $('#form-FocalLength #d, #form-FocalLength #n').validationEngine('hide');
-                $('#form-FocalLength #resultF2').val(FocalLength.f2(d1 + d2, FocalLength.f1(d1, n1, sr1, sr2), FocalLength.f1(d2, n2, sr2, sr3)));
+                $('#form-FocalLength #resultF2').val(FocalLength.f2(FocalLength.d3(d1, d2, n1, n2, sr1, sr2, sr3), FocalLength.f1(d1, n1, sr1, sr2), FocalLength.f1(d2, n2, sr2, sr3)));
             } else {
                 if (n1 <= 1) {
                     $('#form-FocalLength #n1').validationEngine('showPrompt', ' 参数限定条件：n > 1', 'error', 'topRight', true);
@@ -538,7 +544,7 @@
 
     });
 
-    //计算 f’（胶合透镜方焦距）
+    //胶合透镜后截距
     $('#form-FocalLength #result-d-2').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
@@ -574,9 +580,9 @@
             if (n1 > 1 && n2 > 1 && d1 > 0 && d2 > 0) {
                 $('#form-FocalLength #d, #form-FocalLength #n').validationEngine('hide');
                 //bfl =f’(1-d/f1’)，  f1’是第一片透镜的焦距；
-                var f = FocalLength.f2(d1 + d2, FocalLength.f1(d1, n1, sr1, sr2), FocalLength.f1(d2, n2, sr2, sr3));
+                var f = FocalLength.f2(FocalLength.d3(d1, d2, n1, n2, sr1, sr2, sr3), FocalLength.f1(d1, n1, sr1, sr2), FocalLength.f1(d2, n2, sr2, sr3));
                 var f1 = FocalLength.f1(d1, n1, sr1, sr2);
-                $('#form-FocalLength #resultD2').val(FocalLength.d2(f, d1 + d2, f1));
+                $('#form-FocalLength #resultD2').val(FocalLength.d2(f, FocalLength.d3(d1, d2, n1, n2, sr1, sr2, sr3), f1));
             } else {
                 if (n1 <= 1) {
                     $('#form-FocalLength #n1').validationEngine('showPrompt', ' 参数限定条件：n > 1', 'error', 'topRight', true);
@@ -610,13 +616,17 @@
             return c / (0.29 * (n - 1) * f * 0.001);
         },
         //计算中心偏差C
-        //c=0.29(n-1)×lf’×60×arctg(Δt/Φ)×0.001
+        //c=f’*Δt*(n-1)/Φ
+        //c=0.29(n-1)×lf’×60×arctg(Δt/Φ)×0.001  废弃
         c2: function(n, f, t, d) {
+            return f * t * (n - 1) / d;
             return 0.29 * (n - 1) * f * 60 * Math.atan(t / d / 180 * Math.PI) * 0.001;
         },
         //计算边缘厚度差Δt
-        //Δt=Φ*tan[c/(0.001*0.29*(n-1)*lf'*60)]
+        //Δt=Φ*c/f'/(n-1)
+        //Δt=Φ*tan[c/(0.001*0.29*(n-1)*lf'*60)] 废弃
         t: function(d, c, n, f) {
+            return d * c / f / (n - 1);
             return d * Math.tan(c / (0.001 * 0.29 * (n - 1) * f * 60) / 180 * Math.PI);
         }
     };
@@ -763,9 +773,11 @@
      *************************/
     var Chamfer = {
         //计算β（面切线方向与零件外圆夹角角度）
-        //β=arccos(Φ/2/SR）
+        //β=arccos(Φ/2/SR）*180/π（注：π=3.14159）
+        //β=arccos(Φ/2/SR） 废弃
         b: function(r, d) {
-            return Math.acos(d / 2 / r) / Math.PI * 180;
+
+            return Math.acos(d / 2 / r) * 180 / Math.PI;
         },
         //计算α倒角角度
         //当Φ/SR＜0.7时，α=45°，当0.7≤Φ/SR＜1.5时，α=30°，当1.5≤Φ/SR＜2时，α=不倒角
@@ -1068,42 +1080,222 @@
             return 2 * ((m + (0.293 * d + 0.05 * d) / 1.414) * d + (m - 1) * 0.05 * d);
         },
         //排列方法：1个 D=（2*m-1)*Φ+2*（m-1）*0.05*Φ；d=0.05*Φ
-        '1-1': '1个',
-        '3-1': '3个',
-        '4-1': '4个',
-        '1-2': '1+6=7个',
-        '3-2': '3+9=12个',
-        '4-2': '4+10=14个',
-        '1-3': '1+6+12=19个',
-        '3-3': '3+9+15=27个',
-        '4-3': '4+10+17=31个',
-        '1-4': '1+6+12+18=37个',
-        '3-4': '3+9+15+22=49个',
-        '4-4': '4+10+17+23=54个',
-        '1-5': '1+6+12+18+25=62个',
-        '3-5': '3+9+15+22+28=77个',
-        '4-5': '4+10+17+23+29=83个',
-        '1-6': '1+6+12+18+25+31=93个',
-        '3-6': '3+9+15+22+28+34=111个',
-        '4-6': '4+10+17+23+29+35=118个',
-        '1-7': '1+6+12+18+25+31+37=130个',
-        '3-7': '3+9+15+22+28+34+41=152个',
-        '4-7': '4+10+17+23+29+35+42=160个',
-        '1-8': '1+6+12+18+25+31+37+43=173个',
-        '3-8': '3+9+15+22+28+34+41+47=199个',
-        '4-8': '4+10+17+23+29+35+42+48=208个',
-        '1-9': '1+6+12+18+25+31+37+43+50=223个',
-        '3-9': '3+9+15+22+28+34+41+47+53=252个',
-        '4-9': '4+10+17+23+29+35+42+48+54=262个',
-        '1-10': '1+6+12+18+25+31+37+43+50+56=279个',
-        '3-10': '3+9+15+22+28+34+41+47+53+59=311个',
-        '4-10': '4+10+17+23+29+35+42+48+54+60=322个',
-        '1-11': '1+6+12+18+25+31+37+43+50+56+62=341个',
-        '3-11': '3+9+15+22+28+34+41+47+53+59+66=377个',
-        '4-11': '4+10+17+23+29+35+42+48+54+60+67=389个',
-        '1-12': '1+6+12+18+25+31+37+43+50+56+62+68=409个',
-        '3-12': '3+9+15+22+28+34+41+47+53+59+66+72=449个',
-        '4-12': '4+10+17+23+29+35+42+48+54+60+67+73=462个'
+        '1-1': {
+            N: '1个',
+            D: function(d) {
+                return 1 * d;
+            }
+        },
+        '3-1': {
+            N: '3个',
+            D: function(d) {
+                return 2.2 * d;
+            }
+        },
+        '4-1': {
+            N: '4个',
+            D: function(d) {
+                return 2.48 * d;
+            }
+        },
+        '1-2': {
+            N: '1+6=7个',
+            D: function(d) {
+                return 3.1 * d;
+            }
+        },
+        '3-2': {
+            N: '3+9=12个',
+            D: function(d) {
+                return 4.2 * d;
+            }
+        },
+        '4-2': {
+            N: '4+10=14个',
+            D: function(d) {
+                return 4.58 * d;
+            }
+        },
+        '1-3': {
+            N: '1+6+12=19个',
+            D: function(d) {
+                return 5.2 * d;
+            }
+        },
+        '3-3': {
+            N: '3+9+15=27个',
+            D: function(d) {
+                return 6.3 * d;
+            }
+        },
+        '4-3': {
+            N: '4+10+17=31个',
+            D: function(d) {
+                return 6.68 * d;
+            }
+        },
+        '1-4': {
+            N: '1+6+12+18=37个',
+            D: function(d) {
+                return 7.3 * d;
+            }
+        },
+        '3-4': {
+            N: '3+9+15+22=49个',
+            D: function(d) {
+                return 8.4 * d;
+            }
+        },
+        '4-4': {
+            N: '4+10+17+23=54个',
+            D: function(d) {
+                return 8.78 * d;
+            }
+        },
+        '1-5': {
+            N: '1+6+12+18+25=62个',
+            D: function(d) {
+                return 9.4 * d;
+            }
+        },
+        '3-5': {
+            N: '3+9+15+22+28=77个',
+            D: function(d) {
+                return 10.5 * d;
+            }
+        },
+        '4-5': {
+            N: '4+10+17+23+29=83个',
+            D: function(d) {
+                return 10.88 * d;
+            }
+        },
+        '1-6': {
+            N: '1+6+12+18+25+31=93个',
+            D: function(d) {
+                return 11.5 * d;
+            }
+        },
+        '3-6': {
+            N: '3+9+15+22+28+34=111个',
+            D: function(d) {
+                return 12.6 * d;
+            }
+        },
+        '4-6': {
+            N: '4+10+17+23+29+35=118个',
+            D: function(d) {
+                return 12.98 * d;
+            }
+        },
+        '1-7': {
+            N: '1+6+12+18+25+31+37=130个',
+            D: function(d) {
+                return 13.6 * d;
+            }
+        },
+        '3-7': {
+            N: '3+9+15+22+28+34+41=152个',
+            D: function(d) {
+                return 14.7 * d;
+            }
+        },
+        '4-7': {
+            N: '4+10+17+23+29+35+42=160个',
+            D: function(d) {
+                return 15.08 * d;
+            }
+        },
+        '1-8': {
+            N: '1+6+12+18+25+31+37+43=173个',
+            D: function(d) {
+                return 15.7 * d;
+            }
+        },
+        '3-8': {
+            N: '3+9+15+22+28+34+41+47=199个',
+            D: function(d) {
+                return 16.8 * d;
+            }
+        },
+        '4-8': {
+            N: '4+10+17+23+29+35+42+48=208个',
+            D: function(d) {
+                return 17.18 * d;
+            }
+        },
+        '1-9': {
+            N: '1+6+12+18+25+31+37+43+50=223个',
+            D: function(d) {
+                return 17.8 * d;
+            }
+        },
+        '3-9': {
+            N: '3+9+15+22+28+34+41+47+53=252个',
+            D: function(d) {
+                return 18.9 * d;
+            }
+        },
+        '4-9': {
+            N: '4+10+17+23+29+35+42+48+54=262个',
+            D: function(d) {
+                return 19.28 * d;
+            }
+        },
+        '1-10': {
+            N: '1+6+12+18+25+31+37+43+50+56=279个',
+            D: function(d) {
+                return 19.9 * d;
+            }
+        },
+        '3-10': {
+            N: '3+9+15+22+28+34+41+47+53+59=311个',
+            D: function(d) {
+                return 21 * d;
+            }
+        },
+        '4-10': {
+            N: '4+10+17+23+29+35+42+48+54+60=322个',
+            D: function(d) {
+                return 21.38 * d;
+            }
+        },
+        '1-11': {
+            N: '1+6+12+18+25+31+37+43+50+56+62=341个',
+            D: function(d) {
+                return 22 * d;
+            }
+        },
+        '3-11': {
+            N: '3+9+15+22+28+34+41+47+53+59+66=377个',
+            D: function(d) {
+                return 23.1 * d;
+            }
+        },
+        '4-11': {
+            N: '4+10+17+23+29+35+42+48+54+60+67=389个',
+            D: function(d) {
+                return 23.48 * d;
+            }
+        },
+        '1-12': {
+            N: '1+6+12+18+25+31+37+43+50+56+62+68=409个',
+            D: function(d) {
+                return 24.1 * d;
+            }
+        },
+        '3-12': {
+            N: '3+9+15+22+28+34+41+47+53+59+66+72=449个',
+            D: function(d) {
+                return 25.2 * d;
+            }
+        },
+        '4-12': {
+            N: '4+10+17+23+29+35+42+48+54+60+67+73=462个',
+            D: function(d) {
+                return 25.58 * d;
+            }
+        },
     };
 
     $('#form-Arrangement #d').on('change', function() {
@@ -1133,8 +1325,8 @@
             var d = Number($('#form-Arrangement #d').val());
             var c = $('#form-Arrangement #c').val();
             var m = Number(c.split('-')[0]);
-            $('#form-Arrangement #m').val(Arrangement[c]);
-            $('#form-Arrangement #Di').val(Arrangement['c' + m](d, m));
+            $('#form-Arrangement #m').val(Arrangement[c].N);
+            $('#form-Arrangement #Di').val(Arrangement[c].D(d));
         }
     });
 
