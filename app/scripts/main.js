@@ -1,3 +1,4 @@
+'use strict';
 (function($) {
 
     $.validationEngine.defaults.promptPosition = 'centerRight';
@@ -7,10 +8,9 @@
         var cssClasses = $(obj).attr('class');
         if (cssClasses) {
             cssClasses = cssClasses.split(' ');
-            var result = [];
             for (var i = cssClasses.length - 1; i >= 0; i--) {
-                if (cssClasses[i].indexOf('validate') == 0) {
-                    $(obj).removeClass(cssClasses[i])
+                if (cssClasses[i].indexOf('validate') === 0) {
+                    $(obj).removeClass(cssClasses[i]);
                 }
             }
         }
@@ -28,10 +28,10 @@
         $('.tabs a').eq(0).trigger('click');
     });
 
-    var validationEngineOptions = {
-        scroll: false,
-        promptPosition: 'centerRight'
-    };
+    // var validationEngineOptions = {
+    //     scroll: false,
+    //     promptPosition: 'centerRight'
+    // };
 
 
     /**************************
@@ -146,10 +146,10 @@
         return (2 / l) * (Math.sqrt(1 - (Math.pow(d / 2 / sr1, 2))) - 1) * dsr;
     };
     var calcConvexAperture2 = function(l, d, sr1, dsr) {
-            return (2 / l) * (1 - Math.sqrt(1 - Math.pow(d / 2 / sr1, 2))) * dsr;
-        }
-        // 计算ΔSR
-        // (4*λ*SR1*SR1*N）/（Φ*Φ）
+        return (2 / l) * (1 - Math.sqrt(1 - Math.pow(d / 2 / sr1, 2))) * dsr;
+    };
+    // 计算ΔSR
+    // (4*λ*SR1*SR1*N）/（Φ*Φ）
     var calcDeviationSR = function(l, sr1, n, d) {
         return (4 * l * sr1 * sr1 * n) / (d * d);
     };
@@ -164,7 +164,7 @@
         e.preventDefault();
 
         //移除之前的验证规则
-        $('#form-aperture input').each(function(data, i) {
+        $('#form-aperture input').each(function() {
             removeValidateRule($(this));
         });
         $('#form-aperture').validationEngine('hideAll');
@@ -204,7 +204,7 @@
         e.preventDefault();
 
         //移除之前的验证规则
-        $('#form-aperture input').each(function(data, i) {
+        $('#form-aperture input').each(function() {
             removeValidateRule($(this));
         });
         $('#form-aperture').validationEngine('hideAll');
@@ -243,7 +243,7 @@
         e.preventDefault();
 
         //移除之前的验证规则
-        $('#form-aperture input').each(function(data, i) {
+        $('#form-aperture input').each(function() {
             removeValidateRule($(this));
         });
         $('#form-aperture').validationEngine('hideAll');
@@ -282,7 +282,7 @@
         e.preventDefault();
 
         //移除之前的验证规则
-        $('#form-aperture input').each(function(data, i) {
+        $('#form-aperture input').each(function() {
             removeValidateRule($(this));
         });
         $('#form-aperture').validationEngine('hideAll');
@@ -321,7 +321,7 @@
         e.preventDefault();
 
         //移除之前的验证规则
-        $('#form-aperture input').each(function(data, i) {
+        $('#form-aperture input').each(function() {
             removeValidateRule($(this));
         });
         $('#form-aperture').validationEngine('hideAll');
@@ -355,7 +355,7 @@
         e.preventDefault();
 
         //移除之前的验证规则
-        $('#form-aperture input').each(function(data, i) {
+        $('#form-aperture input').each(function() {
             removeValidateRule($(this));
         });
         $('#form-aperture').validationEngine('hideAll');
@@ -402,17 +402,22 @@
         f2: function(d, f1, f2) {
             return f1 * f2 / (f1 + f2 - d);
         },
-        //bfl（胶合透镜后截距 l’f）
-        //bfl =f’(1-d/f1’)，  f1’是第一片透镜的焦距；
+        //（胶合透镜后截距 l’f）
+        //l'f=f'*(1-d/f1'），  f1’是第一片透镜的焦距；
         d2: function(f, d, f1) {
             return f * (1 - d / f1);
+        },
+        // 胶合件焦距
+        // bfl=l'f-r3*d2/(n2*(r3-r2)+(n2-1)*d2)
+        bfl: function(f, n1, n2, sr1, sr2, sr3, d1, d2) {
+            return f - sr3 * d2 / (n2 * (sr3 - sr2) + (n2 - 1) * d2);
         }
     };
     //像方焦距
     $('#form-FocalLength #result-f-1').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
-        $('#form-FocalLength input').each(function(data, i) {
+        $('#form-FocalLength input').each(function() {
             removeValidateRule($(this));
         });
         $('#form-FocalLength').validationEngine('hideAll');
@@ -431,10 +436,6 @@
             var n = Number($('#form-FocalLength #n').val());
             var sr1 = Number($('#form-FocalLength #sr1-1').val()) === 0 ? 999999999 : Number($('#form-FocalLength #sr1-1').val());
             var sr2 = Number($('#form-FocalLength #sr2-1').val()) === 0 ? 999999999 : Number($('#form-FocalLength #sr2-1').val());
-
-            console.log(sr1);
-
-            $('#form-aperture #resultN5').val(calcN2(n, d1, d2));
 
             if (n > 1 && d > 0) {
                 $('#form-FocalLength #d, #form-FocalLength #n').validationEngine('hide');
@@ -455,7 +456,7 @@
     $('#form-FocalLength #result-d-1').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
-        $('#form-FocalLength input').each(function(data, i) {
+        $('#form-FocalLength input').each(function() {
             removeValidateRule($(this));
         });
         $('#form-FocalLength').validationEngine('hideAll');
@@ -494,7 +495,7 @@
     $('#form-FocalLength #result-f-2').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
-        $('#form-FocalLength input').each(function(data, i) {
+        $('#form-FocalLength input').each(function() {
             removeValidateRule($(this));
         });
         $('#form-FocalLength').validationEngine('hideAll');
@@ -548,7 +549,7 @@
     $('#form-FocalLength #result-d-2').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
-        $('#form-FocalLength input').each(function(data, i) {
+        $('#form-FocalLength input').each(function() {
             removeValidateRule($(this));
         });
         $('#form-FocalLength').validationEngine('hideAll');
@@ -582,7 +583,7 @@
                 //bfl =f’(1-d/f1’)，  f1’是第一片透镜的焦距；
                 var f = FocalLength.f2(FocalLength.d3(d1, d2, n1, n2, sr1, sr2, sr3), FocalLength.f1(d1, n1, sr1, sr2), FocalLength.f1(d2, n2, sr2, sr3));
                 var f1 = FocalLength.f1(d1, n1, sr1, sr2);
-                $('#form-FocalLength #resultD2').val(FocalLength.d2(f, FocalLength.d3(d1, d2, n1, n2, sr1, sr2, sr3), f1));
+                $('#form-FocalLength #resultD2').val(FocalLength.bfl(FocalLength.d2(f, FocalLength.d3(d1, d2, n1, n2, sr1, sr2, sr3), f1), n1, n2, sr1, sr2, sr3, d1, d2));
             } else {
                 if (n1 <= 1) {
                     $('#form-FocalLength #n1').validationEngine('showPrompt', ' 参数限定条件：n > 1', 'error', 'topRight', true);
@@ -620,14 +621,12 @@
         //c=0.29(n-1)×lf’×60×arctg(Δt/Φ)×0.001  废弃
         c2: function(n, f, t, d) {
             return f * t * (n - 1) / d;
-            return 0.29 * (n - 1) * f * 60 * Math.atan(t / d / 180 * Math.PI) * 0.001;
         },
         //计算边缘厚度差Δt
         //Δt=Φ*c/f'/(n-1)
         //Δt=Φ*tan[c/(0.001*0.29*(n-1)*lf'*60)] 废弃
         t: function(d, c, n, f) {
             return d * c / f / (n - 1);
-            return d * Math.tan(c / (0.001 * 0.29 * (n - 1) * f * 60) / 180 * Math.PI);
         }
     };
 
@@ -637,7 +636,7 @@
     $('#form-CenterDeviation #result-c-1').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
-        $('#form-CenterDeviation input').each(function(data, i) {
+        $('#form-CenterDeviation input').each(function() {
             removeValidateRule($(this));
         });
         $('#form-CenterDeviation').validationEngine('hideAll');
@@ -669,7 +668,7 @@
     $('#form-CenterDeviation #result-a').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
-        $('#form-CenterDeviation input').each(function(data, i) {
+        $('#form-CenterDeviation input').each(function() {
             removeValidateRule($(this));
         });
         $('#form-CenterDeviation').validationEngine('hideAll');
@@ -701,7 +700,7 @@
     $('#form-CenterDeviation #result-c-2').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
-        $('#form-CenterDeviation input').each(function(data, i) {
+        $('#form-CenterDeviation input').each(function() {
             removeValidateRule($(this));
         });
         $('#form-CenterDeviation').validationEngine('hideAll');
@@ -736,7 +735,7 @@
     $('#form-CenterDeviation #result-t').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
-        $('#form-CenterDeviation input').each(function(data, i) {
+        $('#form-CenterDeviation input').each(function() {
             removeValidateRule($(this));
         });
         $('#form-CenterDeviation').validationEngine('hideAll');
@@ -801,7 +800,7 @@
     $('#form-Chamfer #result-b').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
-        $('#form-CenterDeviation input').each(function(data, i) {
+        $('#form-CenterDeviation input').each(function() {
             removeValidateRule($(this));
         });
         $('#form-Chamfer').validationEngine('hideAll');
@@ -833,7 +832,7 @@
     $('#form-Chamfer #result-a').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
-        $('#form-CenterDeviation input').each(function(data, i) {
+        $('#form-CenterDeviation input').each(function() {
             removeValidateRule($(this));
         });
         $('#form-Chamfer').validationEngine('hideAll');
@@ -877,7 +876,7 @@
                 h: h,
                 m: m,
                 s: s
-            }
+            };
         },
         //角度=度+（分+秒/60）/60"
         angleB: function(h, m, s) {
@@ -912,7 +911,7 @@
     $('#form-Switch #switchA').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
-        $('#form-Switch input').each(function(data, i) {
+        $('#form-Switch input').each(function() {
             removeValidateRule($(this));
         });
 
@@ -942,7 +941,7 @@
     $('#form-Switch #switchB').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
-        $('#form-Switch input').each(function(data, i) {
+        $('#form-Switch input').each(function() {
             removeValidateRule($(this));
         });
 
@@ -967,7 +966,7 @@
     $('#form-Switch #switchC').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
-        $('#form-Switch input').each(function(data, i) {
+        $('#form-Switch input').each(function() {
             removeValidateRule($(this));
         });
 
@@ -982,7 +981,7 @@
     $('#form-Switch #switchD').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
-        $('#form-Switch input').each(function(data, i) {
+        $('#form-Switch input').each(function() {
             removeValidateRule($(this));
         });
 
@@ -998,7 +997,7 @@
     $('#form-Switch #switchE').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
-        $('#form-Switch input').each(function(data, i) {
+        $('#form-Switch input').each(function() {
             removeValidateRule($(this));
         });
         // $('#form-Switch').validationEngine('hideAll');
@@ -1017,7 +1016,7 @@
     $('#form-Switch #switchF').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
-        $('#form-Switch input').each(function(data, i) {
+        $('#form-Switch input').each(function() {
             removeValidateRule($(this));
         });
 
@@ -1034,7 +1033,7 @@
     $('#form-Switch #switchG').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
-        $('#form-Switch input').each(function(data, i) {
+        $('#form-Switch input').each(function() {
             removeValidateRule($(this));
         });
 
@@ -1050,7 +1049,7 @@
     $('#form-Switch #switchH').on('click', function(e) {
         e.preventDefault();
         //移除之前的验证规则
-        $('#form-Switch input').each(function(data, i) {
+        $('#form-Switch input').each(function() {
             removeValidateRule($(this));
         });
 
@@ -1299,7 +1298,7 @@
     };
 
     $('#form-Arrangement #d').on('change', function() {
-        $('#form-Arrangement input').each(function(data, i) {
+        $('#form-Arrangement input').each(function() {
             removeValidateRule($(this));
         });
 
@@ -1312,7 +1311,7 @@
     });
 
     $('#form-Arrangement #c').on('change', function() {
-        $('#form-Arrangement input').each(function(data, i) {
+        $('#form-Arrangement input').each(function() {
             removeValidateRule($(this));
         });
 
@@ -1324,7 +1323,6 @@
         ) {
             var d = Number($('#form-Arrangement #d').val());
             var c = $('#form-Arrangement #c').val();
-            var m = Number(c.split('-')[0]);
             $('#form-Arrangement #m').val(Arrangement[c].N);
             $('#form-Arrangement #Di').val(Arrangement[c].D(d));
         }
