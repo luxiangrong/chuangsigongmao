@@ -187,7 +187,7 @@
 
             if (sr1 > 0 && sr2 > 0) {
                 $('#form-aperture #SR1, #form-aperture #SR2').validationEngine('hide');
-                $('#form-aperture #resultN1').val(calcRecessedAperture(l, d, sr1, sr2));
+                $('#form-aperture #resultN1').val(Math.abs(calcRecessedAperture(l, d, sr1, sr2)));
             } else {
                 if (sr1 <= 0) {
                     $('#form-aperture #SR1').validationEngine('showPrompt', ' 参数限定条件：SR > 0', 'error', 'topRight', true);
@@ -226,7 +226,7 @@
 
             if (sr1 > 0 && sr2 > 0) {
                 $('#form-aperture #SR1, #form-aperture #SR2').validationEngine('hide');
-                $('#form-aperture #resultN2').val(calcConvexAperture(l, d, sr1, sr2));
+                $('#form-aperture #resultN2').val(Math.abs(calcConvexAperture(l, d, sr1, sr2)));
             } else {
                 if (sr1 <= 0) {
                     $('#form-aperture #SR1').validationEngine('showPrompt', ' 参数限定条件：SR > 0', 'error', 'topRight', true);
@@ -265,7 +265,7 @@
 
             if (sr1 > 0 && sr2 > 0) {
                 $('#form-aperture #dSR, #form-aperture #SR3').validationEngine('hide');
-                $('#form-aperture #resultN3').val(calcRecessedAperture2(l, d, sr2, sr1));
+                $('#form-aperture #resultN3').val(Math.abs(calcRecessedAperture2(l, d, sr2, sr1)));
             } else {
                 if (sr1 <= 0) {
                     $('#form-aperture #dSR').validationEngine('showPrompt', ' 参数限定条件：SR > 0', 'error', 'topRight', true);
@@ -304,7 +304,7 @@
 
             if (sr1 > 0 && sr2 > 0) {
                 $('#form-aperture #dSR, #form-aperture #SR3').validationEngine('hide');
-                $('#form-aperture #resultN4').val(calcConvexAperture2(l, d, sr2, sr1));
+                $('#form-aperture #resultN4').val(Math.abs(calcConvexAperture2(l, d, sr2, sr1)));
             } else {
                 if (sr1 <= 0) {
                     $('#form-aperture #dSR').validationEngine('showPrompt', ' 参数限定条件：SR > 0', 'error', 'topRight', true);
